@@ -1,77 +1,145 @@
 import 'package:event_corner/model/constants.dart';
+import 'package:event_corner/model/fade_animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        width: size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 80,
-              height: 80,
-              child: Center(child: Text("Logo")),
-              decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: Colors.black),
-                  borderRadius: BorderRadius.circular(10.0)),
+        body: Container(
+      width: size.width,
+      height: size.height,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 0,
+            top: 0,
+            child: Image.asset(
+              "assets/images/signup_top.png",
+              width: size.width * 0.3,
             ),
-            buildContainer(
-                size,
-                'User name',
-                false,
-                Icon(
-                  CupertinoIcons.person_solid,
-                  color: kTextColor,
-                )),
-            buildContainer(
-                size,
-                'Password',
-                true,
-                Icon(
-                  CupertinoIcons.padlock_solid,
-                  color: kTextColor,
-                )),
-            CupertinoButton(
-              color: CupertinoColors.activeBlue,
-              onPressed: () {  },
-              child: Text("Login"),
-            )
-          ],
-        ),
+          ),
+          Positioned(
+            left: 0,
+            bottom: 0,
+            child: Image.asset(
+              "assets/images/main_bottom.png",
+              width: size.width * 0.3,
+            ),
+          ),
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: Image.asset(
+              "assets/images/login_bottom.png",
+              width: size.width * 0.45,
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FadeAnimation(
+                1.0,Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: size.width * 0.7,
+                      height: size.height * 0.1,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/images/logo2.png"))),
+                    )),
+              ),
+              SizedBox(
+                height: size.height * 0.01,
+              ),
+              FadeAnimation(
+                1.5,buildContainer(
+                    size,
+                    'Your User name ',
+                    false,
+                    Icon(
+                      Icons.account_circle,
+                      color: kTextColor,
+                    )),
+              ),
+              FadeAnimation(
+                1.7,buildContainer(
+                    size,
+                    'Password ',
+                    true,
+                    Icon(
+                      Icons.lock,
+                      color: kTextColor,
+                    )),
+              ),
+              SizedBox(
+                height: size.height * 0.01,
+              ),
+              FadeAnimation(
+                2.0,Container(
+                  width: 300,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      color: kButtonColor,
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 2,
+                            color: kShadowColor,
+                            offset: Offset(0, 1)),
+                      ],
+                      borderRadius: BorderRadius.circular(5.0)),
+                  child: CupertinoButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                          fontFamily: 'Ubuntu',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22.0,
+                          letterSpacing: 1,
+                          shadows: [
+                            BoxShadow(
+                                blurRadius: 1,
+                                offset: Offset(0, 1),
+                                color: kShadowColor)
+                          ],
+                          color: kPrimaryColor),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
       ),
-    );
+    ));
   }
 
   Container buildContainer(Size size, text, bool obscure, Widget icons) {
     return Container(
       width: size.width,
       height: 80,
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: CupertinoTextField(
         placeholder: text,
-        placeholderStyle: TextStyle(fontSize: 15.0, color: kTextColor),
+        placeholderStyle:
+            TextStyle(fontSize: 15.0, color: kTextColor, fontFamily: 'Ubuntu'),
         obscureText: obscure,
         prefix: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: icons,
         ),
-        prefixMode: OverlayVisibilityMode.editing,
-        padding: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(8.0)),
+        padding: EdgeInsets.all(0),
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(blurRadius: 2, color: kShadowColor, offset: Offset(0, 1)),
+        ], color: kSecondnaryColor, borderRadius: BorderRadius.circular(8.0)),
       ),
     );
   }
