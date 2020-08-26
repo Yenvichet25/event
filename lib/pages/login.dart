@@ -1,5 +1,6 @@
 import 'package:event_corner/model/constants.dart';
 import 'package:event_corner/model/fade_animation.dart';
+import 'package:event_corner/pages/dashboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,12 +9,12 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
+class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-        body: Container(
+    return CupertinoPageScaffold(
+        child: Container(
       width: size.width,
       height: size.height,
       child: Stack(
@@ -46,7 +47,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FadeAnimation(
-                1.0,Align(
+                0.8,
+                Align(
                     alignment: Alignment.center,
                     child: Container(
                       width: size.width * 0.7,
@@ -60,7 +62,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
                 height: size.height * 0.01,
               ),
               FadeAnimation(
-                1.5,buildContainer(
+                1.5,
+                buildContainer(
                     size,
                     'Your User name ',
                     false,
@@ -70,7 +73,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
                     )),
               ),
               FadeAnimation(
-                1.7,buildContainer(
+                1.7,
+                buildContainer(
                     size,
                     'Password ',
                     true,
@@ -83,7 +87,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
                 height: size.height * 0.01,
               ),
               FadeAnimation(
-                2.0,Container(
+                2.0,
+                Container(
                   width: 300,
                   height: 60,
                   decoration: BoxDecoration(
@@ -96,7 +101,13 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin{
                       ],
                       borderRadius: BorderRadius.circular(5.0)),
                   child: CupertinoButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              fullscreenDialog: true,
+                              builder: (_) => DashBoard()));
+                    },
                     child: Text(
                       "Login",
                       style: TextStyle(

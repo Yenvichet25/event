@@ -1,6 +1,6 @@
+import 'package:event_corner/model/constants.dart';
 import 'package:event_corner/pages/login.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:loading_animations/loading_animations.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,13 +16,13 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 3))
+        AnimationController(vsync: this, duration: Duration(milliseconds: 5000))
           ..addListener(() {
             setState(() {});
           });
     animation = CurvedAnimation(
         parent: animationController, curve: Curves.fastOutSlowIn);
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(milliseconds: 5000), () {
       animationController.reverse(from: 0.0)
         ..then((value) => Navigator.push(
             context, CupertinoPageRoute(builder: (_) => LoginPage())));
@@ -33,8 +33,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-        body: Container(
+    return CupertinoPageScaffold(
+        child: Container(
       width: size.width,
       child: Stack(
         children: [
@@ -57,15 +57,15 @@ class _SplashScreenState extends State<SplashScreen>
           Align(
             alignment: Alignment.center,
             child: Image.asset(
-              "assets/images/2.png",
-              width: size.width * 0.7,
+              "assets/images/3.png",
+              width: size.width * 0.3,
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: LoadingBouncingLine.circle(
               size: 50.0,
-              backgroundColor: Colors.black,
+              backgroundColor: kColor,
               duration: Duration(seconds: 3),
             ),
           ),
