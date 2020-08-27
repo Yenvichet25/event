@@ -1,10 +1,10 @@
 import 'package:event_corner/model/constants.dart';
+import 'package:event_corner/model/pagedate.dart';
+import 'package:event_corner/pages/couponpage.dart';
+import 'package:event_corner/pages/eventpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
-import 'coupon.dart';
-import 'event.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -13,122 +13,140 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   int selectedIndex;
+  List<Widget> pages = [];
+
   @override
   Widget build(BuildContext context) {
+    pages = [
+      EventPage(),
+      CouponPage(),
+    ];
     Size size = MediaQuery.of(context).size;
     return CupertinoPageScaffold(
       backgroundColor: kSecondnaryColor,
-      child: SafeArea(
+      child: Container(
+        width: size.width,
+        height: size.height,
         child: Stack(
           children: [
-            Column(
-              children: [
-                Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      width: size.width * 0.4,
-                      height: size.height * 0.1,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("assets/images/2.png"))),
-                    )),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
-                Text(
-                  "Submit Documents",
-                  style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      letterSpacing: 1,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28),
-                ),
-                SizedBox(
-                  height: size.height * 0.01,
-                ),
-                Text(
-                  "We need to verity your infomation.\nPlease submit the documents bellow to process\n your application.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-//                Row(
-//                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                  children: [
-//                    Event(),
-//                    Coupon()
-//                  ],
-//                )
-                Container(
-                    height: 180,
-                    child: ListView.builder(
-                      itemCount: 2,
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.all(0),
-                      itemBuilder: (_, index) {
-                        return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 13),
-                            child: Material(
-                              child: InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    selectedIndex = index;
-                                  });
-                                },
-                                child: Container(
-                                    width: 170,
-                                    height: 180,
-                                    decoration: BoxDecoration(
-                                      color: selectedIndex == index
-                                          ? CupertinoColors.activeOrange
-                                          : kPrimaryColor.withOpacity(0.5),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            offset: Offset(0, 15),
-                                            blurRadius: 15,
-                                            spreadRadius: -10,
-                                            color: kShadowListColor),
-                                      ],
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.calendar_view_day,
-                                          color: kShadowColor,
-                                          size: 100,
-                                        ),
-                                        Text(
-                                          "Coupon",
-                                          style: TextStyle(
-                                              fontSize: 28.0,
-                                              fontFamily: 'Ubuntu',
-                                              letterSpacing: 1,
-                                              fontWeight: FontWeight.w500,
-                                              shadows: [
-                                                BoxShadow(
-                                                    blurRadius: 2,
-                                                    offset: Offset(0, 2),
-                                                    color: kShadowListColor)
-                                              ]),
-                                        )
-                                      ],
-                                    )),
+            Positioned(
+              top: 40,
+              left: 0,
+              right: 0,
+              child: Column(
+                children: [
+                  Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        width: size.width * 0.45,
+                        height: size.height * 0.2,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage("assets/images/2.png"),
+                                fit: BoxFit.contain)),
+                      )),
+                  SizedBox(
+                    height: size.height * 0.06,
+                  ),
+                  Text(
+                    "Welcome",
+                    style: TextStyle(
+                        fontFamily: 'Ubuntu',
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 28),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  Text(
+                    "We need to verity your infomation.\nPlease submit the documents bellow to process\n your application.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: 'Ubuntu',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  Container(
+                      width: size.width,
+                      height: size.height * 0.3,
+                      child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: 2,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (_, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Material(
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      selectedIndex = index;
+                                      Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                              fullscreenDialog: true,
+                                              builder: (_) => pages[index]));
+                                    });
+                                  },
+                                  child: Container(
+                                      width: size.width * 0.48,
+                                      height: size.height * 0.18,
+                                      decoration: BoxDecoration(
+                                        color: selectedIndex == index
+                                            ? Color(0XFFFFF380)
+                                            : kPrimaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              offset: Offset(0, 20),
+                                              blurRadius: 20,
+                                              color: kSecondnaryColor),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            width: size.width * 0.28,
+                                            height: size.height * 0.15,
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                              fit: BoxFit.contain,
+                                              image: images[index].img,
+                                            )),
+//                                       child: Icon(FontAwesomeIcons.qrcode),
+                                          ),
+                                          Text(
+                                            text[index],
+                                            style: TextStyle(
+                                                fontSize: 28.0,
+                                                fontFamily: 'Ubuntu',
+                                                letterSpacing: 1,
+                                                fontWeight: FontWeight.w500,
+                                                shadows: [
+                                                  BoxShadow(
+                                                      blurRadius: 2,
+                                                      offset: Offset(0, 2),
+                                                      color: kShadowListColor)
+                                                ]),
+                                          )
+                                        ],
+                                      )),
+                                ),
                               ),
-                            ));
-                      },
-                    ))
-              ],
-            )
+                            ),
+                          );
+                        },
+                      )),
+                ],
+              ),
+            ),
           ],
         ),
       ),
