@@ -52,14 +52,14 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     alignment: Alignment.center,
                     child: Container(
                       width: size.width * 0.7,
-                      height: size.height * 0.1,
+                      height: size.height * 0.12,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage("assets/images/logo2.png"))),
+                              image: AssetImage("assets/images/2.png"))),
                     )),
               ),
               SizedBox(
-                height: size.height * 0.01,
+                height: size.height * 0.02,
               ),
               FadeAnimation(
                 1.5,
