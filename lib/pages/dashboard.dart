@@ -2,6 +2,7 @@ import 'package:event_corner/model/constants.dart';
 import 'package:event_corner/model/pagedate.dart';
 import 'package:event_corner/pages/couponpage.dart';
 import 'package:event_corner/pages/eventpage.dart';
+import 'package:event_corner/pages/scanPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -18,7 +19,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     pages = [
-      EventPage(),
+      ScanPage(),
       CouponPage(),
     ];
     Size size = MediaQuery.of(context).size;
