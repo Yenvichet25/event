@@ -25,7 +25,9 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(Duration(milliseconds: 5000), () {
       animationController.reverse(from: 0.0)
         ..then((value) => Navigator.push(
-            context, CupertinoPageRoute(builder: (_) => LoginPage())));
+            context,
+            CupertinoPageRoute(
+                fullscreenDialog: true, builder: (_) => LoginPage())));
     });
     super.initState();
   }

@@ -1,4 +1,5 @@
 import 'package:event_corner/model/constants.dart';
+import 'package:event_corner/widget/ticketWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -22,24 +23,28 @@ class _TicketPageState extends State<TicketPage> {
 //                colors: [Color(0xffff538e), Color(0xffff7378)],
 //                begin: Alignment.center,
 //                end: Alignment.bottomCenter)),
-      color: kShadowColor,
+        color: kShadowColor,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 20),
-        child: FlutterTicketWidget(
+        child: TicketWidget(
             width: size.width * 0.8,
-            height: size.height * 0.62,
+            height: size.height * 0.65,
             isCornerRounded: true,
             child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
-                  child: Text("Event Corner",style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Ubuntu'
-                  ),),
+                  child: Text(
+                    "Event Corner",
+                    style: TextStyle(
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Ubuntu'),
+                  ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -95,20 +100,32 @@ class _TicketPageState extends State<TicketPage> {
                       ticketDetailsWidget(
                           'First Name', 'Kevin', 'Last Name', 'MuskSolo'),
                       Padding(
-                        padding: const EdgeInsets.only(left: 0,right: 30),
-                        child: ticketDetailsWidget('Age', '16', 'Gender', 'Male'),
+                        padding: const EdgeInsets.only(left: 0, right: 30),
+                        child:
+                            ticketDetailsWidget('Age', '16', 'Gender', 'Male'),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 20,left: 0),
+                        padding: const EdgeInsets.only(right: 20, left: 0),
                         child: ticketDetailsWidget(
                             'Date', '25-09-2020', 'Session', 'Morning'),
                       ),
+                      SizedBox(height: 18,),
+                      Row(
+                          children: List.generate(
+                              24,
+                                  (index) => Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 2),
+                                child: Container(
+                                  width: 6,
+                                  height: 1,
+                                  color: Colors.black,
+                                ),
+                              ))),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: size.height * 0.01,
-                ),
+
+
                 Container(
                   width: 250.0,
                   height: 60.0,

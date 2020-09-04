@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   @override
   void initState() {
     animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 1200))
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
           ..addListener(() {
             setState(() {});
           });
@@ -231,7 +231,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 width: 300,
                 height: 60,
                 decoration: BoxDecoration(
-                    color: Color(0XFFDFA278),
+                    color: Color(0xffdfa278),
                     boxShadow: [
                       BoxShadow(
                           blurRadius: 2,

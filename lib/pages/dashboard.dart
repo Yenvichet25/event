@@ -25,7 +25,7 @@ class _DashBoardState extends State<DashBoard> {
     ];
     Size size = MediaQuery.of(context).size;
     return CupertinoPageScaffold(
-      backgroundColor: kSecondnaryColor,
+      backgroundColor: Color(0xfff2f2f2),
       child: Container(
         width: size.width,
         height: size.height,
@@ -51,83 +51,91 @@ class _DashBoardState extends State<DashBoard> {
                   Container(
                       width: size.width,
                       height: size.height * 0.3,
-                      child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: 2,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (_, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Material(
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedIndex = index;
-                                      Navigator.push(
-                                          context,
-                                          CupertinoPageRoute(
-                                              fullscreenDialog: true,
-                                              builder: (_) => pages[index]));
-                                    });
-                                  },
-                                  child: Container(
-                                      width: size.width * 0.48,
-                                      height: size.height * 0.18,
-                                      decoration: BoxDecoration(
-                                        color: selectedIndex == index
-                                            ? Color(0XFFDFA278)
-                                            : kPrimaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              offset: Offset(0, 20),
-                                              blurRadius: 20,
-                                              color: kSecondnaryColor),
-                                        ],
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: size.width * 0.28,
-                                            height: size.height * 0.15,
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                              fit: BoxFit.contain,
-                                              image: images[index].img,
-                                            )),
-//                                       child: Icon(FontAwesomeIcons.qrcode),
-                                          ),
-                                          Text(
-                                            text[index],
-                                            style: TextStyle(
-                                                fontSize: 28.0,
-                                                fontFamily: 'Ubuntu',
-                                                letterSpacing: 1,
-                                                fontWeight: FontWeight.w500,
-                                                shadows: [
-                                                  BoxShadow(
-                                                      blurRadius: 2,
-                                                      offset: Offset(0, 2),
-                                                      color: kShadowListColor)
-                                                ]),
-                                          )
-                                        ],
-                                      )),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      )),
+                      child: ListView(
+                          physics: NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            buildActionsWidget(0, context, size, 'event', () {
+                              setState(() {
+                                selectedIndex = 0;
+                              });
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => ScanPage()));
+                            }, 'assets/images/Fintech_mobile_scan_qr-512.png'),
+                            buildActionsWidget(1, context, size, 'cupon', () {
+                              setState(() {
+                                selectedIndex = 1;
+                              });
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => CouponScan()));
+                            }, 'assets/images/ticket-icon-png-4.png'),
+                          ])),
                 ],
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Padding buildActionsWidget(
+      int index, BuildContext context, Size size, title, fn, img) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: Material(
+//          type: MaterialType.transparency,
+          child: InkWell(
+            // radius: 64,
+            splashColor: Colors.grey,
+            onTap: fn,
+            child: Container(
+                width: size.width * 0.48,
+                height: size.height * 0.18,
+                decoration: BoxDecoration(
+//                  color: index == selectedIndex ?Colors.red:kPrimaryColor,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: size.width * 0.28,
+                      height: size.height * 0.15,
+                      decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          image: DecorationImage(
+                            fit: BoxFit.contain,
+                            image: AssetImage(img),
+                          )),
+//                                       child: Icon(FontAwesomeIcons.qrcode),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    Text(
+                      title,
+                      style: TextStyle(
+                          fontSize: 28.0,
+                          fontFamily: 'Ubuntu',
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.w500,
+                          shadows: [
+                            BoxShadow(
+                                blurRadius: 2,
+                                offset: Offset(0, 2),
+                                color: kShadowListColor)
+                          ]),
+                    )
+                  ],
+                )),
+          ),
         ),
       ),
     );
