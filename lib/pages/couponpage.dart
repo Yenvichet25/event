@@ -2,12 +2,15 @@ import 'package:event_corner/model/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'scanPage.dart';
+
 class CouponPage extends StatefulWidget {
   @override
   _CouponPageState createState() => _CouponPageState();
 }
 
 class _CouponPageState extends State<CouponPage> {
+  int selectedIndex ;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -36,7 +39,7 @@ class _CouponPageState extends State<CouponPage> {
                 color: kSecondnaryColor,
                 child: InkWell(
                   onTap: (){
-                    print("Let go");
+                    print("Let go List Coupon");
                   },
                   child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
@@ -79,7 +82,7 @@ class _CouponPageState extends State<CouponPage> {
                                           width: size.width * 0.08,
                                         ),
                                         Text(
-                                          "Event",
+                                          "Apple",
                                           style: TextStyle(
                                               fontSize: 16.0,
                                               fontFamily: 'Ubuntu',

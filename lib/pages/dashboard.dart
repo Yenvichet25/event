@@ -1,6 +1,7 @@
 import 'package:event_corner/model/constants.dart';
 import 'package:event_corner/model/pagedate.dart';
 import 'package:event_corner/pages/couponpage.dart';
+import 'package:event_corner/pages/couponscan.dart';
 import 'package:event_corner/pages/eventpage.dart';
 import 'package:event_corner/pages/scanPage.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,7 +21,7 @@ class _DashBoardState extends State<DashBoard> {
   Widget build(BuildContext context) {
     pages = [
       ScanPage(),
-      CouponPage(),
+      CouponScan(),
     ];
     Size size = MediaQuery.of(context).size;
     return CupertinoPageScaffold(
@@ -46,29 +47,7 @@ class _DashBoardState extends State<DashBoard> {
                                 image: AssetImage("assets/images/2.png"),
                                 fit: BoxFit.contain)),
                       )),
-                  SizedBox(
-                    height: size.height * 0.06,
-                  ),
-                  Text(
-                    "Welcome",
-                    style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        letterSpacing: 1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 28),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.01,
-                  ),
-                  Text(
-                    "We need to verity your infomation.\nPlease submit the documents bellow to process\n your application.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: size.height * 0.02),
+                  SizedBox(height: size.height * 0.12),
                   Container(
                       width: size.width,
                       height: size.height * 0.3,
@@ -98,7 +77,7 @@ class _DashBoardState extends State<DashBoard> {
                                       height: size.height * 0.18,
                                       decoration: BoxDecoration(
                                         color: selectedIndex == index
-                                            ? Color(0XFFFFF380)
+                                            ? Color(0XFFDFA278)
                                             : kPrimaryColor,
                                         borderRadius:
                                             BorderRadius.circular(8.0),
