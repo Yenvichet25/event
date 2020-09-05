@@ -4,6 +4,7 @@ import 'package:event_corner/pages/couponpage.dart';
 import 'package:event_corner/pages/couponscan.dart';
 import 'package:event_corner/pages/eventpage.dart';
 import 'package:event_corner/pages/scanPage.dart';
+import 'package:event_corner/pages/ticketPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -20,8 +21,8 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     pages = [
-      ScanPage(),
-      CouponScan(),
+      TicketPage(),
+      CouponPage(),
     ];
     Size size = MediaQuery.of(context).size;
     return CupertinoPageScaffold(
@@ -71,7 +72,7 @@ class _DashBoardState extends State<DashBoard> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => CouponScan()));
+                                      builder: (_) => CouponPage()));
                             }, 'assets/images/ticket-icon-png-4.png'),
                           ])),
                 ],

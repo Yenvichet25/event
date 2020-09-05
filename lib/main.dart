@@ -1,4 +1,3 @@
-import 'package:event_corner/model/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'pages/splashscreen.dart';

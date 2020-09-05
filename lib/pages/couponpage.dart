@@ -1,8 +1,9 @@
 import 'package:event_corner/model/constants.dart';
+import 'package:event_corner/widget/couponboy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'scanPage.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_ticket_widget/flutter_ticket_widget.dart';
 
 class CouponPage extends StatefulWidget {
   @override
@@ -10,7 +11,8 @@ class CouponPage extends StatefulWidget {
 }
 
 class _CouponPageState extends State<CouponPage> {
-  int selectedIndex ;
+  List<String> objectincoupon = ["Ticket", "Coupon 20%", "BackPack"];
+  int selectedIndex;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,97 +23,153 @@ class _CouponPageState extends State<CouponPage> {
           slivers: [
             SliverAppBar(
               pinned: true,
+              centerTitle: true,
+              title: Text(
+                "My Coupons",
+                style: TextStyle(color: Colors.black),
+              ),
               backgroundColor: kSecondnaryColor,
               elevation: 0.0,
               leading: IconButton(
-                icon: Icon(
-                    Icons.arrow_back,
-                    color: kColor
-                ),
+                icon: Icon(Icons.arrow_back_ios, color: kColor),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
             ),
-            SliverToBoxAdapter(
-              child: Container(
-                height: size.height,
-                color: kSecondnaryColor,
-                child: InkWell(
-                  onTap: (){
-                    print("Let go List Coupon");
-                  },
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: 4,
-                    scrollDirection: Axis.vertical,
-                    padding: EdgeInsets.all(0),
-                    itemBuilder: (_, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Container(
-                          height: size.height * 0.09,
-                          decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: Offset(0, 15),
-                                  blurRadius: 15,
-                                  spreadRadius: -10,
-                                  color: kShadowListColor),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding:
-                                const EdgeInsets.symmetric(horizontal: 20),
-                                child: Stack(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.chrome_reader_mode,
-                                          size: 28,
-                                          color: kShadowColor,
-                                        ),
-                                        SizedBox(
-                                          width: size.width * 0.08,
-                                        ),
-                                        Text(
-                                          "Apple",
-                                          style: TextStyle(
-                                              fontSize: 16.0,
-                                              fontFamily: 'Ubuntu',
-                                              letterSpacing: 1,
-                                              fontWeight: FontWeight.w600),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Icon(
-                                          Icons.check_circle,
-                                          color: Colors.orange,
-                                        )
-                                      ],
-                                    )
-                                  ],
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (_, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Container(
+                        width: size.width,
+                        height: size.height * 0.1,
+                        color: Colors.yellow,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Couponbody(
+                          width: size.width,
+                          height: size.height,
+                          color: Colors.transparent,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 10,left: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("${objectincoupon[index]}",style: TextStyle(fontSize: 20),),
+                                Spacer(
+                                  flex: 1,
                                 ),
-                              ),
-                            ],
+                                Text("x",style: TextStyle(fontSize: 20, color: Colors.orange)),
+                                Spacer(
+                                  flex: 1,
+                                ),
+                                Text("1",style: TextStyle(fontSize: 20)),
+                                Spacer(
+                                  flex: 1,
+                                ),
+                                Text("=",style: TextStyle(fontSize: 20, color: Colors.orange)),
+                                Spacer(
+                                  flex: 1,
+                                ),
+                                Text("100",style: TextStyle(fontSize: 20)),
+                                Spacer(
+                                  flex: 1,
+                                ),
+                                IconButton(
+                                  onPressed: (){},
+                                  icon: Icon(Icons.check_circle_outline
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                        )),
+                  );
+                },
+                childCount: 3,
               ),
             )
+//            SliverToBoxAdapter(
+//              child: Container(
+//                height: size.height,
+//                color: kSecondnaryColor,
+//                child: InkWell(
+//                  onTap: (){
+//                    print("Let go List Coupon");
+//                  },
+//                  child: ListView.builder(
+//                    physics: NeverScrollableScrollPhysics(),
+//                    itemCount: 4,
+//                    scrollDirection: Axis.vertical,
+//                    padding: EdgeInsets.all(0),
+//                    itemBuilder: (_, index) {
+////                      return Padding(
+////                        padding: const EdgeInsets.symmetric(
+////                            horizontal: 20, vertical: 10),
+////                        child: Container(
+////                          height: size.height * 0.09,
+////                          decoration: BoxDecoration(
+////                            color: kPrimaryColor,
+////                            borderRadius: BorderRadius.circular(8.0),
+////                            boxShadow: [
+////                              BoxShadow(
+////                                  offset: Offset(0, 15),
+////                                  blurRadius: 15,
+////                                  spreadRadius: -10,
+////                                  color: kShadowListColor),
+////                            ],
+////                          ),
+////                          child: Column(
+////                            mainAxisAlignment: MainAxisAlignment.center,
+////                            children: [
+////                              Padding(
+////                                padding:
+////                                const EdgeInsets.symmetric(horizontal: 20),
+////                                child: Stack(
+////                                  children: [
+////                                    Row(
+////                                      children: [
+////                                        Icon(
+////                                          Icons.chrome_reader_mode,
+////                                          size: 28,
+////                                          color: kShadowColor,
+////                                        ),
+////                                        SizedBox(
+////                                          width: size.width * 0.08,
+////                                        ),
+////                                        Text(
+////                                          "Apple",
+////                                          style: TextStyle(
+////                                              fontSize: 16.0,
+////                                              fontFamily: 'Ubuntu',
+////                                              letterSpacing: 1,
+////                                              fontWeight: FontWeight.w600),
+////                                        )
+////                                      ],
+////                                    ),
+////                                    Row(
+////                                      mainAxisAlignment: MainAxisAlignment.end,
+////                                      children: [
+////                                        Icon(
+////                                          Icons.check_circle,
+////                                          color: Colors.orange,
+////                                        )
+////                                      ],
+////                                    )
+////                                  ],
+////                                ),
+////                              ),
+////                            ],
+////                          ),
+////                        ),
+////                      );
+//                      return Container();
+//                    },
+//                  ),
+//                ),
+//              ),
+//            )
           ],
         ),
       ),
