@@ -12,6 +12,7 @@ class CouponPage extends StatefulWidget {
 
 class _CouponPageState extends State<CouponPage> {
   List<String> objectincoupon = ["Ticket", "Coupon 20%", "BackPack"];
+  List<String> backgroundcoupon = ["assets/images/back2.jpg","assets/images/back3.jpg","assets/images/back4.jpg"];
   int selectedIndex;
   @override
   Widget build(BuildContext context) {
@@ -26,12 +27,12 @@ class _CouponPageState extends State<CouponPage> {
               centerTitle: true,
               title: Text(
                 "My Coupons",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.grey),
               ),
               backgroundColor: kSecondnaryColor,
               elevation: 0.0,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: kColor),
+                icon: Icon(Icons.arrow_back_ios, color: Colors.grey),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -45,41 +46,61 @@ class _CouponPageState extends State<CouponPage> {
                     child: Container(
                         width: size.width,
                         height: size.height * 0.1,
-                        color: Colors.yellow,
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Couponbody(
                           width: size.width,
                           height: size.height,
-                          color: Colors.transparent,
+                          color: Colors.green,
+                          assetimage: "${backgroundcoupon[index]}",
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 10,left: 30),
+                            padding: const EdgeInsets.only(right: 10, left: 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("${objectincoupon[index]}",style: TextStyle(fontSize: 20),),
+                                Text(
+                                  "${objectincoupon[index]}",
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white),
+                                ),
+                                Column(
+                                  children: List.generate(
+                                      10,
+                                          (index) => Padding(
+                                        padding: const EdgeInsets.only(top: 5.0 , left: 5),
+                                        child: Container(
+                                          width: 2,
+                                          height: 2,
+                                          color: Colors.white,
+                                        ),
+                                      )),
+                                ),
                                 Spacer(
                                   flex: 1,
                                 ),
-                                Text("x",style: TextStyle(fontSize: 20, color: Colors.orange)),
+                                Text("x",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.white)),
                                 Spacer(
                                   flex: 1,
                                 ),
-                                Text("1",style: TextStyle(fontSize: 20)),
+                                Text("1", style: TextStyle(fontSize: 20,color: Colors.white)),
                                 Spacer(
                                   flex: 1,
                                 ),
-                                Text("=",style: TextStyle(fontSize: 20, color: Colors.orange)),
+                                Text("=",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.white)),
                                 Spacer(
                                   flex: 1,
                                 ),
-                                Text("100",style: TextStyle(fontSize: 20)),
+                                Text("100", style: TextStyle(fontSize: 20, color: Colors.white)),
                                 Spacer(
                                   flex: 1,
                                 ),
                                 IconButton(
-                                  onPressed: (){},
-                                  icon: Icon(Icons.check_circle_outline
-                                  ),
+                                  onPressed: () {},
+                                  color: Colors.white,
+                                  icon: Icon(Icons.check_circle_outline),
                                 )
                               ],
                             ),
@@ -89,7 +110,8 @@ class _CouponPageState extends State<CouponPage> {
                 },
                 childCount: 3,
               ),
-            )
+            ),
+
 //            SliverToBoxAdapter(
 //              child: Container(
 //                height: size.height,
