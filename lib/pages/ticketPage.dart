@@ -100,7 +100,7 @@ class _TicketPageState extends State<TicketPage> {
                       ticketDetailsWidget(
                           'First Name', 'Kevin', 'Last Name', 'MuskSolo'),
                       Padding(
-                        padding: const EdgeInsets.only(left: 0, right: 30),
+                        padding: const EdgeInsets.only(left: 0, right: 20),
                         child:
                             ticketDetailsWidget('Age', '16', 'Gender', 'Male'),
                       ),

@@ -1,9 +1,9 @@
-import 'package:event_corner/model/constants.dart';
-import 'package:event_corner/widget/couponboy.dart';
+import 'package:event_corner/pages/coupondata.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_ticket_widget/flutter_ticket_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CouponPage extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class CouponPage extends StatefulWidget {
 
 class _CouponPageState extends State<CouponPage> {
   List<String> objectincoupon = ["Ticket", "Coupon 20%", "BackPack"];
-  List<String> backgroundcoupon = ["assets/images/back2.jpg","assets/images/back3.jpg","assets/images/back4.jpg"];
+
   int selectedIndex;
   @override
   Widget build(BuildContext context) {
@@ -20,97 +20,41 @@ class _CouponPageState extends State<CouponPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              pinned: true,
-              centerTitle: true,
-              title: Text(
-                "My Coupons",
-                style: TextStyle(color: Colors.grey),
-              ),
-              backgroundColor: kSecondnaryColor,
-              elevation: 0.0,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: Colors.grey),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (_, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Container(
-                        width: size.width,
-                        height: size.height * 0.1,
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Couponbody(
-                          width: size.width,
-                          height: size.height,
-                          color: Colors.green,
-                          assetimage: "${backgroundcoupon[index]}",
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 10, left: 30),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "${objectincoupon[index]}",
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.white),
-                                ),
-                                Column(
-                                  children: List.generate(
-                                      10,
-                                          (index) => Padding(
-                                        padding: const EdgeInsets.only(top: 5.0 , left: 5),
-                                        child: Container(
-                                          width: 2,
-                                          height: 2,
-                                          color: Colors.white,
-                                        ),
-                                      )),
-                                ),
-                                Spacer(
-                                  flex: 1,
-                                ),
-                                Text("x",
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white)),
-                                Spacer(
-                                  flex: 1,
-                                ),
-                                Text("1", style: TextStyle(fontSize: 20,color: Colors.white)),
-                                Spacer(
-                                  flex: 1,
-                                ),
-                                Text("=",
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white)),
-                                Spacer(
-                                  flex: 1,
-                                ),
-                                Text("100", style: TextStyle(fontSize: 20, color: Colors.white)),
-                                Spacer(
-                                  flex: 1,
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  color: Colors.white,
-                                  icon: Icon(Icons.check_circle_outline),
-                                )
-                              ],
-                            ),
-                          ),
-                        )),
-                  );
-                },
-                childCount: 3,
-              ),
-            ),
+        backgroundColor: Colors.white,
+        body: Stack(
+          children: [
+            Container(
+              width: size.width,
+              height: size.height,
+              decoration: BoxDecoration(color: Color(0xff0f0c29)),
+              child: CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    pinned: true,
+                    centerTitle: true,
+                    title: Text(
+                      "My Coupons",
+                      style: GoogleFonts.nunito(color: Colors.grey),
+                    ),
+                    backgroundColor: Color(0xff0f0c29),
+                    elevation: 0.0,
+                    leading: IconButton(
+                      icon: Icon(Icons.arrow_back_ios, color: Colors.grey),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (_, index) {
+                        return ListCoupons(
+                          objectincoupon: objectincoupon[index],
+                        );
+                      },
+                      childCount: 3,
+                    ),
+                  ),
 
 //            SliverToBoxAdapter(
 //              child: Container(
@@ -192,6 +136,31 @@ class _CouponPageState extends State<CouponPage> {
 //                ),
 //              ),
 //            )
+                ],
+              ),
+            ),
+            Positioned(
+                bottom: 10,
+                right: 10,
+                child: InkWell(
+                  onTap: () {},
+                  child: Container(
+                      width: size.width * 0.3,
+                      height: size.height * 0.08,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.teal.withOpacity(0.3),
+                                blurRadius: 5)
+                          ],
+                          border: Border.all(width: 2, color: Colors.teal),
+                          borderRadius: BorderRadius.circular(5.0)),
+                      child: Center(
+                          child: Text(
+                        "Accept",
+                        style: GoogleFonts.nunito(color: Colors.white),
+                      ))),
+                ))
           ],
         ),
       ),

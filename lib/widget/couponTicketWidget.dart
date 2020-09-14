@@ -6,15 +6,15 @@ class Couponbody extends StatefulWidget {
   final Widget child;
   final Color color;
   final bool isCornerRounded;
-  final String assetimage;
+  final Color colorborder;
 
   Couponbody(
       {@required this.width,
       @required this.height,
       @required this.child,
+        this.colorborder,
       this.color = Colors.white,
-      this.isCornerRounded = false, this.assetimage});
-
+      this.isCornerRounded = false});
   @override
   _CouponbodyState createState() => _CouponbodyState();
 }
@@ -30,8 +30,8 @@ class _CouponbodyState extends State<Couponbody> {
         height: widget.height,
         child: widget.child,
         decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.fill, image: AssetImage(widget.assetimage)),
+            boxShadow: [BoxShadow(color: widget.colorborder.withOpacity(0.3),blurRadius: 5)],
+            border: Border.all(width: 2,color: widget.colorborder),
             color: widget.color,
             borderRadius: widget.isCornerRounded
                 ? BorderRadius.circular(20.0)

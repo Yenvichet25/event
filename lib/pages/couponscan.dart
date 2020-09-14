@@ -1,5 +1,4 @@
 import 'package:event_corner/pages/couponpage.dart';
-import 'package:event_corner/pages/ticketPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
