@@ -63,6 +63,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
             value: jsonEncode({"username": uName, "password": passwd}));
         widget.appModel.user = user;
         widget.appModel.token = data['token'];
+        widget.appModel.storeId = user.stores[0].id;
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(

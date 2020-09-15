@@ -13,6 +13,7 @@ String userModelToJson(User data) {
 class User {
   String id;
   String username;
+  List<Store> stores;
   List<String> roles;
   Profile profile;
   String createdAt;
@@ -21,7 +22,7 @@ class User {
   User({
     this.id,
     this.username,
-
+    this.stores,
     this.roles,
     this.profile,
     this.createdAt,
@@ -32,7 +33,7 @@ class User {
     return  new User(
       id: json["_id"],
       username: json["username"],
-
+      stores: new List<Store>.from(json['stores'].map ((x) => Store.fromMap(x))),
       roles: new List<String>.from(json["roles"].map((x) => x)),
       profile: Profile.fromJson(json["profile"]),
       createdAt: json["createdAt"],
@@ -53,7 +54,7 @@ class User {
   Map<String, dynamic> toJson() => {
     "id": id,
     "username": username,
-
+    "stores": new List<String>.from(stores.map((x) => x)),
     "roles": new List<String>.from(roles.map((x) => x)),
     "profile": profile.toJson(),
     "createdAt": createdAt,

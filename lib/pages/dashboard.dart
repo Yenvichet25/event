@@ -1,14 +1,18 @@
+import 'dart:convert';
+
 import 'package:event_corner/model/appModel.dart';
 import 'package:event_corner/model/constants.dart';
+import 'package:event_corner/model/event_model.dart';
 
 import 'package:event_corner/pages/couponscan.dart';
 
 import 'package:event_corner/pages/scanPage.dart';
-
+import 'package:event_corner/provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
 
 class DashBoard extends StatefulWidget {
   final AppModel appModel;
@@ -23,9 +27,35 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   int selectedIndex;
   List<Widget> pages = [];
+  List<EventModel> events = [];
+  Future fetchEvents() async {
+    String url =
+        '${Provider.url}${Provider.prefix}/event?store_id=${widget.appModel.storeId}';
+    print(url);
+    return await http.get(url, headers: {"token": widget.appModel.token}).then(
+        (http.Response response) {
+      return jsonDecode(response.body);
+    });
+  }
+
+  @override
+  void initState() {
+    fetchEvents().then((data) {
+      if (data['code'] == 201) {
+        events = List<EventModel>.from(
+            data['data'].map((e) => EventModel.fromJson(e)));
+
+        events.forEach((e) {
+          widget.appModel.eventId = e.id;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    print(widget.appModel.storeId);
     pages = [
       ScanPage(),
       CouponScan(),
@@ -69,7 +99,9 @@ class _DashBoardState extends State<DashBoard> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => ScanPage()));
+                                      builder: (_) => ScanPage(
+                                        appModel : widget.appModel
+                                      )));
                             }, 'assets/images/Fintech_mobile_scan_qr-512.png'),
                             buildActionsWidget(1, context, size, 'cupon', () {
                               setState(() {

@@ -1,9 +1,13 @@
+import 'package:event_corner/model/appModel.dart';
 import 'package:event_corner/pages/ticketPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
 
 class ScanPage extends StatefulWidget {
+  final AppModel appModel;
+
+  const ScanPage({Key key, this.appModel}) : super(key: key);
   @override
   _ScanPageState createState() => _ScanPageState();
 }
@@ -58,7 +62,7 @@ class _ScanPageState extends State<ScanPage> {
           ),
         ),
       )
-          : TicketPage()
+          : TicketPage(orderId : _qrInfo,appModel : widget.appModel)
     );
   }
 }

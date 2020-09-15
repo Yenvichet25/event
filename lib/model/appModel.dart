@@ -7,18 +7,21 @@ import 'package:http/http.dart' as http;
 
 class AppModel extends Model {
 //    API URL
-  final String url; //https://eventcorner.co
+
+  final String url; //https://salewhat.co
   final String prefix; // /api/v1;
   String _username;
   String _password;
   String _token;
+  String _storeId;
+  String eventId;
   User _user;
   AppModel({@required this.url, @required this.prefix})
       : assert(url != null, prefix != null);
 
   get uName => _username;
   get passwd => _password;
-
+  get storeId => _storeId;
   get token => _token;
   get user => _user;
 
@@ -26,7 +29,7 @@ class AppModel extends Model {
   set uName(val) => _username = val;
   set passwd(val) => _password = val;
   set token(val) => _token = val;
-
+  set storeId(val) => _storeId = val;
   Future loginFn({String username, String password}) async {
     String apiUrl = '$url/user/login';
     return await http

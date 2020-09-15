@@ -38,6 +38,7 @@ dependencies:
   http: ^0.12.2
   scoped_model: ^1.0.1
   flutter_secure_storage: ^3.3.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
