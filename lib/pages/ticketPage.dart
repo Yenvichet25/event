@@ -36,7 +36,7 @@ class _TicketPageState extends State<TicketPage> {
     if (widget.orderId != null) {
       fetchEvents().then((data) {
         if (data['code'] == 201) {
-          if(data['data'].length > 0){
+          if (data['data'].length > 0) {
             setState(() {
               order = data['data'][0];
             });
@@ -55,38 +55,28 @@ class _TicketPageState extends State<TicketPage> {
         : Scaffold(
             backgroundColor: Colors.white,
             body: Container(
-//        decoration: BoxDecoration(
-//            gradient: LinearGradient(
-//                colors: [Color(0xffff538e), Color(0xffff7378)],
-//                begin: Alignment.center,
-//                end: Alignment.bottomCenter)),
               color: kShadowColor,
               alignment: Alignment.center,
               padding: EdgeInsets.symmetric(horizontal: 20),
-              child: TicketWidget(
-                  width: size.width * 0.8,
-                  height: size.height * 0.65,
-                  isCornerRounded: true,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Text(
-                          "${order['eventDoc']['title']}",
-                          style: TextStyle(
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Ubuntu'),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TicketWidget(
+                      width: size.width * 0.8,
+                      height: size.height * 0.5,
+                      isCornerRounded: true,
+                      child: Column(
                         children: [
                           Container(
-                            padding: EdgeInsets.only(top: 13, left: 10),
+                            width: 150,
+                            height: 100,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.contain,
+                                    image: AssetImage("assets/images/2.png"))),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 0, left: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -107,91 +97,101 @@ class _TicketPageState extends State<TicketPage> {
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Text(
-                                  "Event Ticket",
-                                  style: TextStyle(
-                                      fontFamily: 'Ubuntu',
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Name:",
+                                      style: TextStyle(
+                                          fontFamily: 'Ubuntu',
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                        '${order['userDoc']['profile']['name'].toUpperCase()}')
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
                                 ),
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Container(
-                              width: 100,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.contain,
-                                      image:
-                                          AssetImage("assets/images/2.png"))),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "${order['eventDoc']['title']}",
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Ubuntu'),
                             ),
-                          )
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: Column(
+                              children: <Widget>[
+                                // ticketDetailsWidget(
+                                //     'Name',
+                                //     '${order['userDoc']['profile']['name'].toUpperCase()}',
+                                //     '',
+                                //     ''),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 0, right: 20),
+                                  child: ticketDetailsWidget(
+                                      'Tel',
+                                      '+855 ${order['userDoc']['profile']['tel']}',
+                                      'Org',
+                                      '${order['userDoc']['profile']['org'].toUpperCase()}'),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(right: 20, left: 0),
+                                  child: ticketDetailsWidget(
+                                      'Date',
+                                      '${order['eventDoc']['dateStr']}',
+                                      'Session',
+                                      '${order['time'].toUpperCase()}'),
+                                ),
+                                SizedBox(
+                                  height: 18,
+                                ),
+                                Row(
+                                    children: List.generate(
+                                        24,
+                                        (index) => Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 2),
+                                              child: Container(
+                                                width: 6,
+                                                height: 1,
+                                                color: Colors.black,
+                                              ),
+                                            ))),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'STATUS :  ${order['status'].toUpperCase()}',
+                            style: TextStyle(
+                              fontFamily: 'Ubuntu',
+                              color: Colors.black,
+                            ),
+                          ),
                         ],
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Column(
-                          children: <Widget>[
-                            ticketDetailsWidget(
-                                'First Name', '${order['userDoc']['profile']['name'].toUpperCase()}', 'Last Name', ''),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 0, right: 20),
-                              child: ticketDetailsWidget(
-                                  'Tel', '+855 ${order['userDoc']['profile']['tel']}', 'Org', '${order['userDoc']['profile']['org'].toUpperCase()}'),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 20, left: 0),
-                              child: ticketDetailsWidget(
-                                  'Date', '${order['eventDoc']['dateStr']}', 'Session', '${order['time'].toUpperCase()}'),
-                            ),
-                            SizedBox(
-                              height: 18,
-                            ),
-                            Row(
-                                children: List.generate(
-                                    24,
-                                    (index) => Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 2),
-                                          child: Container(
-                                            width: 6,
-                                            height: 1,
-                                            color: Colors.black,
-                                          ),
-                                        ))),
-                          ],
-                        ),
-                      ),
-
-//                      Container(
-//                        width: 250.0,
-//                        height: 60.0,
-////                        decoration: BoxDecoration(
-////                            image: DecorationImage(
-////                                image: AssetImage('assets/images/barcode.png'),
-////                                fit: BoxFit.cover)),
-//                        child: BarcodeGenerator(
-//                          fromString: '${widget.orderId}',
-//                          codeType: BarCodeType.kBarcodeFormatCode128,
-//                        ),
-//                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'STATUS : ${order['status'].toUpperCase()}',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      )
-                    ],
-                  )),
+                      )),
+                ],
+              ),
             ),
           );
   }
@@ -207,12 +207,14 @@ class _TicketPageState extends State<TicketPage> {
             Text(
               firstTitle,
               style: TextStyle(
+                fontFamily: 'Ubuntu',
                 color: Colors.grey,
               ),
             ),
             Text(
               firstDesc,
               style: TextStyle(
+                fontFamily: 'Ubuntu',
                 color: Colors.black,
               ),
             )
@@ -226,12 +228,14 @@ class _TicketPageState extends State<TicketPage> {
               Text(
                 secondTitle,
                 style: TextStyle(
+                  fontFamily: 'Ubuntu',
                   color: Colors.grey,
                 ),
               ),
               Text(
                 secondDesc,
                 style: TextStyle(
+                  fontFamily: 'Ubuntu',
                   color: Colors.black,
                 ),
               )
@@ -241,135 +245,4 @@ class _TicketPageState extends State<TicketPage> {
       ],
     );
   }
-
-//  Container buildContainer(Size size) {
-//    return Container(
-//      width: size.width,
-//      height: size.height,
-//      padding: EdgeInsets.only(top: 10, right: 10, left: 10),
-//      child: Column(
-//        children: [
-//          Container(
-//            //logo
-//            width: 60,
-//            height: 60,
-//            decoration: BoxDecoration(
-//                image: DecorationImage(
-//                    image: AssetImage("assets/images/3.png"))),
-//          ),
-//          Text(
-//            "LA-A EventCorner",
-//            style:
-//            TextStyle(color: Color(0xff00275e), fontWeight: FontWeight.bold),
-//          ),
-//          SizedBox(
-//            height: 20,
-//          ),
-//          Row(
-//            //Time
-//            children: [
-//              Text("Time :", style: TextStyle(color: Colors.grey)),
-//              Text(
-//                " Evening",
-//                style: TextStyle(color: Color(0xfff79684)),
-//              ),
-//            ],
-//          ),
-//          SizedBox(
-//            height: 10,
-//          ),
-//          Row(
-//            //Date
-//            children: [
-//              Text("Date  :", style: TextStyle(color: Colors.grey)),
-//              Text(
-//                " 25 September 2020",
-//                style: TextStyle(color: Color(0xfff79684)),
-//              ),
-//            ],
-//          ),
-//          SizedBox(
-//            height: 10,
-//          ),
-//          Row(
-//            //InvoiceN
-//            children: [
-//              Text("Invoice :", style: TextStyle(color: Colors.grey)),
-//              Text(
-//                " N001",
-//                style: TextStyle(color: Color(0xfff79684)),
-//              ),
-//            ],
-//          ),
-////                Divider(
-////                  height: 10,
-////                  color: Colors.grey,
-////                  endIndent: 50,
-////                  indent: 1,
-////                  thickness: 2.0,
-////                ),
-//          SizedBox(
-//            height: 37,
-//          ),
-//          Row(
-//            children: List.generate(
-//                16,
-//                    (index) =>
-//                    Padding(
-//                      padding: const EdgeInsets.only(left: 8.2),
-//                      child: Container(
-//                        width: 10,
-//                        height: 2,
-//                        decoration: BoxDecoration(
-//                            gradient: LinearGradient(
-//                                colors: [Color(0xffff538e), Color(0xffff7378)],
-//                                begin: Alignment.center,
-//                                end: Alignment.bottomCenter)),
-//                      ),
-//                    )),
-//          ),
-//          SizedBox(
-//            height: 25,
-//          ),
-//          Row(
-//            //InvoiceN
-//            children: [
-//              Text("Participant:", style: TextStyle(color: Colors.grey)),
-//              Text(
-//                " KerKer",
-//                style: TextStyle(color: Color(0xff00275e)),
-//              ),
-//            ],
-//          ),
-//          SizedBox(
-//            height: size.height * 0.02,
-//          ),
-//          Container(
-//            width: size.width,
-//            height: size.height * 0.05,
-//            child: Table(
-//              border: TableBorder.symmetric(
-//                  inside: BorderSide(color: Color(0xffff538e))),
-//              children: [
-//                TableRow(children: [
-//                  Center(child: Text("N")),
-//                  Center(child: Text("Product")),
-//                  Center(child: Text("Qty")),
-//                  Center(child: Text("Price")),
-//                  Center(child: Text("Amount")),
-//                ]),
-//                TableRow(children: [
-//                  Center(child: Text("1")),
-//                  Center(child: Text("VIP")),
-//                  Center(child: Text("2")),
-//                  Center(child: Text("2 \$")),
-//                  Center(child: Text("4\$")),
-//                ]),
-//              ],
-//            ),
-//          )
-//        ],
-//      ),
-//    );
-//  }
 }
