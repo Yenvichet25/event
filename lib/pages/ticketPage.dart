@@ -51,7 +51,9 @@ class _TicketPageState extends State<TicketPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return order == null
-        ? Container()
+        ? Container(
+      child: Center(child: Text('GR CODE ដែល​អ្នក​បាន​​​ Scan មិនត្រឹមត្រូវ')),
+    )
         : Scaffold(
             backgroundColor: Colors.white,
             body: Container(
