@@ -54,7 +54,6 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
-
     print(widget.appModel.storeId);
     pages = [
       ScanPage(),

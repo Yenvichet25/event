@@ -4,12 +4,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class ListCoupons extends StatefulWidget {
-  final String objectincoupon ;
-
-  const ListCoupons({Key key, this.objectincoupon}) : super(key: key);
+  final String objectincoupon;
+  final dynamic coupons;
+  const ListCoupons({Key key, this.objectincoupon, this.coupons}) : super(key: key);
   @override
   _ListCouponsState createState() => _ListCouponsState();
 }
+
 class _ListCouponsState extends State<ListCoupons> {
   bool oncheck = false;
   List<IconData> iconfor = [
@@ -23,9 +24,9 @@ class _ListCouponsState extends State<ListCoupons> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: InkWell(
-        onTap: (){
+        onTap: () {
           setState(() {
-            oncheck = ! oncheck;
+            oncheck = !oncheck;
           });
         },
         child: Container(
@@ -43,13 +44,17 @@ class _ListCouponsState extends State<ListCoupons> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(iconfor[0], size:60,color: Colors.white,),
+                        Icon(
+                          iconfor[0],
+                          size: 60,
+                          color: Colors.white,
+                        ),
                         Text(
-                          widget.objectincoupon,
-                          style: TextStyle(
-                              fontSize: 15, color: Colors.white),
+                          widget.coupons,
+                          style: TextStyle(fontSize: 15, color: Colors.white),
                         ),
                       ],
                     ),
@@ -69,30 +74,31 @@ class _ListCouponsState extends State<ListCoupons> {
                       flex: 1,
                     ),
                     Text("x",
-                        style: TextStyle(
-                            fontSize: 20, color: Colors.white)),
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
                     Spacer(
                       flex: 1,
                     ),
-                    Text("1", style: TextStyle(fontSize: 20,color: Colors.white)),
+                    Text("1",
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
                     Spacer(
                       flex: 1,
                     ),
                     Text("=",
-                        style: TextStyle(
-                            fontSize: 20, color: Colors.white)),
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
                     Spacer(
                       flex: 1,
                     ),
-                    Text("100", style: TextStyle(fontSize: 20, color: Colors.white)),
+                    Text("100",
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
                     Spacer(
                       flex: 1,
                     ),
-                    IconButton(
-                      onPressed: () {},
+                    Icon(
+                      oncheck == true
+                          ? FontAwesomeIcons.checkCircle
+                          : FontAwesomeIcons.circle,
                       color: Colors.white,
-                      icon: Icon(oncheck == true?FontAwesomeIcons.checkCircle: FontAwesomeIcons.circle),
-                    )
+                    ),
                   ],
                 ),
               ),

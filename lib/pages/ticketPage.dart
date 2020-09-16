@@ -9,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_ticket_widget/flutter_ticket_widget.dart';
 import 'package:http/http.dart' as http;
 
 class TicketPage extends StatefulWidget {
@@ -50,6 +49,7 @@ class _TicketPageState extends State<TicketPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(order['items']);
     Size size = MediaQuery.of(context).size;
     return order == null
         ? Container(
@@ -235,7 +235,9 @@ class _TicketPageState extends State<TicketPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => CouponPage()));
+                                    builder: (_) => CouponPage(
+                                      coupons  : order['items'][1]['productDoc']['name']
+                                    )));
                           },
                           icon: Icon(
                             Icons.calendar_view_day,

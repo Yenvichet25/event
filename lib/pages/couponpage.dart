@@ -1,11 +1,13 @@
 import 'package:event_corner/pages/coupondata.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CouponPage extends StatefulWidget {
+  final dynamic coupons;
+
+  const CouponPage({Key key, this.coupons}) : super(key: key);
   @override
   _CouponPageState createState() => _CouponPageState();
 }
@@ -14,8 +16,20 @@ class _CouponPageState extends State<CouponPage> {
   List<String> objectincoupon = ["Ticket", "Coupon 20%", "BackPack"];
 
   int selectedIndex;
+  var coupons;
+
+  @override
+  void initState() {
+    setState(() {
+//      coupons = widget.order['items'].map((e) => print(e));
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(widget.coupons);
+   // print(coupons);
     Size size = MediaQuery.of(context).size;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -50,6 +64,7 @@ class _CouponPageState extends State<CouponPage> {
                       (_, index) {
                         return ListCoupons(
                           objectincoupon: objectincoupon[index],
+                          coupons: widget.coupons,
                         );
                       },
                       childCount: 3,
