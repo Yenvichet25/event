@@ -47,7 +47,6 @@ class _DashBoardState extends State<DashBoard> {
       if (data['code'] == 201) {
         events = List<EventModel>.from(
             data['data'].map((e) => EventModel.fromJson(e)));
-
         events.forEach((e) {
           widget.appModel.eventId = e.id;
         });
@@ -57,7 +56,7 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.appModel.storeId);
+    // print(widget.appModel.storeId);
     pages = [
       ScanPage(),
       CouponScan(),
@@ -101,9 +100,8 @@ class _DashBoardState extends State<DashBoard> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => ScanPage(
-                                        appModel : widget.appModel
-                                      )));
+                                      builder: (_) =>
+                                          ScanPage(appModel: widget.appModel)));
                             }, 'assets/images/Fintech_mobile_scan_qr-512.png'),
                             buildActionsWidget(1, context, size, 'cupon', () {
                               setState(() {
@@ -112,7 +110,7 @@ class _DashBoardState extends State<DashBoard> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => CouponScan()));
+                                      builder: (_) => CouponPage()));
                             }, 'assets/images/ticket-icon-png-4.png'),
                           ])),
                 ],

@@ -6,13 +6,11 @@ class Couponbody extends StatefulWidget {
   final Widget child;
   final Color color;
   final bool isCornerRounded;
-  final Color colorborder;
 
   Couponbody(
       {@required this.width,
       @required this.height,
       @required this.child,
-        this.colorborder,
       this.color = Colors.white,
       this.isCornerRounded = false});
   @override
@@ -30,9 +28,9 @@ class _CouponbodyState extends State<Couponbody> {
         height: widget.height,
         child: widget.child,
         decoration: BoxDecoration(
-            boxShadow: [BoxShadow(color: widget.colorborder.withOpacity(0.3),blurRadius: 5)],
-            border: Border.all(width: 2,color: widget.colorborder),
-            color: widget.color,
+            //boxShadow: [BoxShadow(color: widget.colorborder, blurRadius: 5)],
+           // order: Border.all(width: 2),
+            color: Colors.white,
             borderRadius: widget.isCornerRounded
                 ? BorderRadius.circular(20.0)
                 : BorderRadius.circular(0.0)),
@@ -51,9 +49,9 @@ class TicketClipper extends CustomClipper<Path> {
     path.lineTo(size.width, 0.0);
 
     path.addOval(
-        Rect.fromCircle(center: Offset(0.0, size.height / 2), radius: 10.0));
+        Rect.fromCircle(center: Offset(0.0, size.height / 2), radius: 6.0));
     path.addOval(Rect.fromCircle(
-        center: Offset(size.width, size.height / 2), radius: 10.0));
+        center: Offset(0.0, size.height / 2), radius: 6.0));
 
     return path;
   }

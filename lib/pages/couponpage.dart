@@ -2,12 +2,8 @@ import 'package:event_corner/pages/coupondata.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../model/constants.dart';
-import '../model/constants.dart';
-import '../model/constants.dart';
-import '../model/constants.dart';
+import 'dart:convert';
 
 class CouponPage extends StatefulWidget {
   final dynamic coupons;
@@ -25,20 +21,21 @@ class _CouponPageState extends State<CouponPage> {
   ];
 
   int selectedIndex;
-  var coupons;
+  List coupons = [];
 
   @override
   void initState() {
-    setState(() {
-//      coupons = widget.order['items'].map((e) => print(e));
-    });
+  setState(() {
+    coupons = List.from(widget.coupons.map((e){
+       widget.coupons.forEach((e));
+    }));
+  });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(widget.coupons);
-    // print(coupons);
+    print(coupons);
     Size size = MediaQuery.of(context).size;
     // return MaterialApp(
     //   debugShowCheckedModeBanner: false,
@@ -108,123 +105,64 @@ class _CouponPageState extends State<CouponPage> {
     //     ),
     //   ),
     // );
-    return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.orange,
-          autofocus: true,
-          tooltip: 'Accept',
-          child: Icon(Icons.assignment_turned_in),
-          onPressed: () {},
-        ),
-        backgroundColor: kShadowColor,
-        body: Container(
-            width: size.width,
-            height: size.height,
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 10),
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: kShadowListColor,
-                        borderRadius: BorderRadius.circular(16.0)),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 100,
-                  child: Container(
-                    color: kShadowColor,
+    return MaterialApp(
+      home: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: kSecondnaryColor,
+              ),
+            ),
+            centerTitle: true,
+            title: Text(
+              'Coupons',
+              style: TextStyle(
+                  color: kSecondnaryColor,
+                  fontFamily: 'Ubuntu',
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.orange,
+            autofocus: true,
+            tooltip: 'Accept',
+            child: Icon(Icons.assignment_turned_in),
+            onPressed: () {},
+          ),
+          backgroundColor: kPrimaryColor,
+          body: Container(
+              width: size.width,
+              height: size.height,
+              child: Stack(
+                children: [
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 40, left: 10),
+                  //   child:
+                  // ),
+                  Container(
+                    color: kPrimaryColor,
                     width: size.width,
                     height: size.height,
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: 3,
+                      itemCount: coupons.length,
                       scrollDirection: Axis.vertical,
                       padding: EdgeInsets.all(0),
                       itemBuilder: (_, index) {
-                        return InkWell(
-                          onTap: (){
-                            print(1);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            child: Container(
-                              height: size.height * 0.09,
-                              decoration: BoxDecoration(
-                                color: kPrimaryColor,
-                                borderRadius: BorderRadius.circular(8.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(0, 15),
-                                      blurRadius: 15,
-                                      spreadRadius: -10,
-                                      color: kShadowListColor),
-                                ],
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    child: Stack(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.chrome_reader_mode,
-                                              size: 28,
-                                              color: kShadowColor,
-                                            ),
-                                            SizedBox(
-                                              width: size.width * 0.05,
-                                            ),
-                                            Text(
-                                              objectincoupon[index],
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontFamily: 'Ubuntu',
-                                                  letterSpacing: 1,
-                                                  fontWeight: FontWeight.w600),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Icon(
-                                              Icons.check_circle,
-                                              color: Colors.orange,
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                        return CouponData(
+                          coupons: coupons[index],
                         );
                       },
                     ),
-                  ),
-                )
-              ],
-            )));
+                  )
+                ],
+              ))),
+    );
   }
 }
-

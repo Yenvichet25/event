@@ -50,7 +50,6 @@ class _TicketPageState extends State<TicketPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(order['items']);
     Size size = MediaQuery.of(context).size;
     return order == null
         ? Container(
@@ -238,7 +237,7 @@ class _TicketPageState extends State<TicketPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => CouponPage(
-                                      coupons  : order['items'][1]['productDoc']['name']
+                                      coupons  : order['items']
                                     )));
                           },
                           icon: Icon(
