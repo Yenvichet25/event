@@ -3,6 +3,7 @@ import 'package:event_corner/model/appModel.dart';
 import 'package:event_corner/model/constants.dart';
 import 'package:event_corner/model/orderModel.dart';
 import 'package:event_corner/pages/couponpage.dart';
+import 'package:event_corner/pages/scanPage.dart';
 import 'package:event_corner/provider/provider.dart';
 import 'package:event_corner/widget/ticketWidget.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,7 +71,7 @@ class _TicketPageState extends State<TicketPage> {
                     children: [
                       TicketWidget(
                           width: size.width * 0.8,
-                          height: size.height * 0.5,
+                          height: size.height * 0.6,
                           isCornerRounded: true,
                           child: Column(
                             children: [
@@ -213,6 +214,7 @@ class _TicketPageState extends State<TicketPage> {
                             borderRadius: BorderRadius.circular(16.0)),
                         child: IconButton(
                           onPressed: () {
+                            // Navigator.push(context, MaterialPageRoute(builder: (_)=>ScanPage()));
                             Navigator.pop(context);
                           },
                           icon: Icon(

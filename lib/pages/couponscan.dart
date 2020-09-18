@@ -1,3 +1,4 @@
+import 'package:event_corner/model/constants.dart';
 import 'package:event_corner/pages/couponpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,20 +44,49 @@ class _CouponScanState extends State<CouponScan> {
 //        title: Text(widget.title),
 //      ),
         body: _camState
-            ? Center(
-          child: SizedBox(
-            height: 500,
-            width: 500,
-            child: QRBarScannerCamera(
-              onError: (context, error) => Text(
-                error.toString(),
-                style: TextStyle(color: Colors.red),
-              ),
-              qrCodeCallback: (code) {
-                _qrCallback(code);
-              },
+            ?Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 400,
+                  width: 400,
+                  child: QRBarScannerCamera(
+                    onError: (context, error) => Text(
+                      error.toString(),
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    qrCodeCallback: (code) {
+                      _qrCallback(code);
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 0),
+              child: IconButton(
+                onPressed: () {
+                  // Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: kColor,
+                ),
+              ),
+            ),
+            Positioned(
+                left: 120,
+                top: 60,
+                child: Text(
+                  "Scan Coupon",
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Ubuntu'),
+                ))
+          ],
         )
             : CouponPage()
     );
