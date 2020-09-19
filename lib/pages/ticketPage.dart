@@ -52,10 +52,7 @@ class _TicketPageState extends State<TicketPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return order == null
-        ? Container(
-            child: Center(
-                child: Text('GR CODE ដែល​អ្នក​បាន​​​ Scan មិនត្រឹមត្រូវ')),
-          )
+        ? buildNoScanResultWidget()
         : Scaffold(
             backgroundColor: Colors.white,
             body: Stack(
@@ -74,6 +71,9 @@ class _TicketPageState extends State<TicketPage> {
                           isCornerRounded: true,
                           child: Column(
                             children: [
+                              SizedBox(
+                                height: 10,
+                              ),
                               Container(
                                 width: 150,
                                 height: 100,
@@ -99,7 +99,11 @@ class _TicketPageState extends State<TicketPage> {
                                         SizedBox(
                                           width: 10,
                                         ),
-                                        Text("${order['_id']}")
+                                        Text(
+                                          "${order['_id']}",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )
                                       ],
                                     ),
                                     SizedBox(
@@ -117,7 +121,10 @@ class _TicketPageState extends State<TicketPage> {
                                           width: 10,
                                         ),
                                         Text(
-                                            '${order['userDoc']['profile']['name'].toUpperCase()}')
+                                          '${order['userDoc']['profile']['name'].toUpperCase()}',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )
                                       ],
                                     ),
                                     SizedBox(
@@ -127,7 +134,7 @@ class _TicketPageState extends State<TicketPage> {
                                 ),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               Align(
                                 alignment: Alignment.center,
@@ -141,7 +148,7 @@ class _TicketPageState extends State<TicketPage> {
                               ),
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
+                                    horizontal: 20, vertical: 20),
                                 child: Column(
                                   children: <Widget>[
                                     // ticketDetailsWidget(
@@ -168,7 +175,7 @@ class _TicketPageState extends State<TicketPage> {
                                           '${order['time'].toUpperCase()}'),
                                     ),
                                     SizedBox(
-                                      height: 18,
+                                      height: 20,
                                     ),
                                     Row(
                                         children: List.generate(
@@ -188,11 +195,13 @@ class _TicketPageState extends State<TicketPage> {
                               SizedBox(
                                 height: 20,
                               ),
+
                               Text(
-                                'STATUS :  ${order['status'].toUpperCase()}',
+                                'STATUS : ${order['status'].toUpperCase()}',
                                 style: TextStyle(
                                   fontFamily: 'Ubuntu',
                                   color: Colors.black,
+                                  fontWeight: FontWeight.bold
                                 ),
                               ),
                             ],
@@ -236,9 +245,8 @@ class _TicketPageState extends State<TicketPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => CouponPage(
-                                      coupons  : order['items']
-                                    )));
+                                    builder: (_) =>
+                                        CouponPage(coupons: order['items'])));
                           },
                           icon: Icon(
                             Icons.calendar_view_day,
@@ -252,6 +260,34 @@ class _TicketPageState extends State<TicketPage> {
               ],
             ),
           );
+  }
+
+  MaterialApp buildNoScanResultWidget() {
+    return MaterialApp(
+        home: Scaffold(
+    appBar: AppBar(
+      elevation: 0,
+      backgroundColor: Colors.white,
+      leading: IconButton(
+        onPressed: (){
+          Navigator.pop(context);
+        },
+        icon: Icon(Icons.arrow_back_ios),
+      ),
+    ),
+          body: Container(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CupertinoActivityIndicator(),
+                    Text('GR CODE ដែល​អ្នក​បាន​​​ Scan មិនត្រឹមត្រូវ'),
+                  ],
+                ),
+              ),
+            ),
+        ),
+      );
   }
 }
 

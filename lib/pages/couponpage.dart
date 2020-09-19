@@ -26,16 +26,14 @@ class _CouponPageState extends State<CouponPage> {
   @override
   void initState() {
   setState(() {
-    coupons = List.from(widget.coupons.map((e){
-       widget.coupons.forEach((e));
-    }));
+    coupons = widget.coupons;
   });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(coupons);
+    print(coupons[0]['productDoc']);
     Size size = MediaQuery.of(context).size;
     // return MaterialApp(
     //   debugShowCheckedModeBanner: false,

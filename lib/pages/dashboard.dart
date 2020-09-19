@@ -107,10 +107,6 @@ class _DashBoardState extends State<DashBoard> {
                               setState(() {
                                 selectedIndex = 1;
                               });
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => CouponPage()));
                             }, 'assets/images/ticket-icon-png-4.png'),
                           ])),
                 ],

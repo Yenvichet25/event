@@ -70,7 +70,8 @@ class _ScanPageState extends State<ScanPage> {
                     padding: const EdgeInsets.only(top: 20, left: 0),
                     child: IconButton(
                       onPressed: () {
-                        // Navigator.pop(context);
+
+                        Navigator.pop(context);
                         //  Navigator.push(context, CupertinoPageRoute(builder: (_)=>DashBoard()));
                       },
                       icon: Icon(

@@ -34,7 +34,7 @@ class _CouponDataState extends State<CouponData> {
                 // color: Color(0xff003060),
                 gradient: LinearGradient(
                     colors: [
-                      Color(0xff003060),
+                      Color(0xff263c77),
                       kSecondnaryColor,
                       //   Color(0xff003060)
                     ],
@@ -56,7 +56,7 @@ class _CouponDataState extends State<CouponData> {
                             Row(
                               children: [
                                 Text(
-                                  widget.coupons.toString(),
+                                  '',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16.0,
@@ -86,15 +86,19 @@ class _CouponDataState extends State<CouponData> {
                     ],
                   ),
                   Positioned(
-                    left: 15,
+                    left: 10,
                     top: 10,
-                    child: Text(
-                      '40 %',
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontFamily: 'Ubuntu',
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                    child: Container(
+                      width: size.width * 0.8,
+                      child: Text(
+                       '${widget.coupons['productDoc']['name']}',
+                        style: TextStyle(
+                            fontSize: 26,
+                            fontFamily: 'Ubuntu',
+                            color: Colors.white,
+                          height: 2
+                            ),
+                      ),
                     ),
                   )
                 ],
