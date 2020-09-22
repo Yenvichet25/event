@@ -5,6 +5,7 @@ import 'package:event_corner/model/constants.dart';
 import 'package:event_corner/model/event_model.dart';
 
 import 'package:event_corner/pages/couponscan.dart';
+import 'package:event_corner/pages/participants.dart';
 
 import 'package:event_corner/pages/scanPage.dart';
 import 'package:event_corner/provider/provider.dart';
@@ -107,6 +108,9 @@ class _DashBoardState extends State<DashBoard> {
                               setState(() {
                                 selectedIndex = 1;
                               });
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (_) => Participants()
+                              ));
                             }, 'assets/images/ticket-icon-png-4.png'),
                           ])),
                 ],

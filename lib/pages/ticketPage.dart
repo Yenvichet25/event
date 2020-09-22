@@ -3,6 +3,7 @@ import 'package:event_corner/model/appModel.dart';
 import 'package:event_corner/model/constants.dart';
 import 'package:event_corner/model/orderModel.dart';
 import 'package:event_corner/pages/couponpage.dart';
+import 'package:event_corner/pages/participants.dart';
 import 'package:event_corner/pages/scanPage.dart';
 import 'package:event_corner/provider/provider.dart';
 import 'package:event_corner/widget/ticketWidget.dart';
@@ -15,12 +16,15 @@ import 'package:http/http.dart' as http;
 class TicketPage extends StatefulWidget {
   final String orderId;
   final AppModel appModel;
-  const TicketPage({Key key, this.orderId, this.appModel}) : super(key: key);
+  List p = [];
+  TicketPage({Key key, this.orderId, this.appModel}) : super(key: key);
   @override
   _TicketPageState createState() => _TicketPageState();
 }
 
 class _TicketPageState extends State<TicketPage> {
+  ParticipantModel participantModel = ParticipantModel();
+
   Future fetchEvents() async {
     String url =
         '${Provider.url}${Provider.prefix}/orders/${widget.orderId}/show';
@@ -54,6 +58,17 @@ class _TicketPageState extends State<TicketPage> {
     return order == null
         ? buildNoScanResultWidget()
         : Scaffold(
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                setState(() {
+                  pa.add(order);
+                });
+                Navigator.pop(context);
+                print(pa.length);
+                print(pa[0]['_id']);
+              },
+            ),
             backgroundColor: Colors.white,
             body: Stack(
               children: [
@@ -195,14 +210,12 @@ class _TicketPageState extends State<TicketPage> {
                               SizedBox(
                                 height: 20,
                               ),
-
                               Text(
                                 'STATUS : ${order['status'].toUpperCase()}',
                                 style: TextStyle(
-                                  fontFamily: 'Ubuntu',
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold
-                                ),
+                                    fontFamily: 'Ubuntu',
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           )),
@@ -264,30 +277,30 @@ class _TicketPageState extends State<TicketPage> {
 
   MaterialApp buildNoScanResultWidget() {
     return MaterialApp(
-        home: Scaffold(
-    appBar: AppBar(
-      elevation: 0,
-      backgroundColor: Colors.white,
-      leading: IconButton(
-        onPressed: (){
-          Navigator.pop(context);
-        },
-        icon: Icon(Icons.arrow_back_ios),
-      ),
-    ),
-          body: Container(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CupertinoActivityIndicator(),
-                    Text('GR CODE ដែល​អ្នក​បាន​​​ Scan មិនត្រឹមត្រូវ'),
-                  ],
-                ),
-              ),
-            ),
+      home: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_ios),
+          ),
         ),
-      );
+        body: Container(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CupertinoActivityIndicator(),
+                Text('GR CODE ដែល​អ្នក​បាន​​​ Scan មិនត្រឹមត្រូវ'),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
