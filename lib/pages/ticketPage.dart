@@ -35,6 +35,16 @@ class _TicketPageState extends State<TicketPage> {
     });
   }
 
+  Future confirmAudient() async {
+    String url =
+        '${Provider.url}${Provider.prefix}/orders/${order['_id']}/confirm_presence';
+    print(url);
+    return await http.post(url, headers: {"token": widget.appModel.token}).then(
+        (http.Response response) {
+      return jsonDecode(response.body);
+    });
+  }
+
   var order;
   @override
   void initState() {
@@ -58,15 +68,14 @@ class _TicketPageState extends State<TicketPage> {
     return order == null
         ? buildNoScanResultWidget()
         : Scaffold(
-            floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.add),
+            floatingActionButton: order['isPresence']?Container():CupertinoButton(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              color: kShadowListColor,
+              child: Text('Accept',style: TextStyle(
+                color: Colors.white
+              ),),
               onPressed: () {
-                setState(() {
-                  pa.add(order);
-                });
-                Navigator.pop(context);
-                print(pa.length);
-                print(pa[0]['_id']);
+                confirmAudient();
               },
             ),
             backgroundColor: Colors.white,
@@ -226,13 +235,14 @@ class _TicketPageState extends State<TicketPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 30, left: 10),
+                      padding: const EdgeInsets.only(top: 40, left: 10),
                       child: Container(
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
+                          shape: BoxShape.circle,
                             color: kShadowListColor,
-                            borderRadius: BorderRadius.circular(16.0)),
+                           ),
                         child: IconButton(
                           onPressed: () {
                             // Navigator.push(context, MaterialPageRoute(builder: (_)=>ScanPage()));
@@ -246,13 +256,13 @@ class _TicketPageState extends State<TicketPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 30, right: 10),
+                      padding: const EdgeInsets.only(top: 40, right: 10),
                       child: Container(
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
                             color: kShadowListColor,
-                            borderRadius: BorderRadius.circular(16.0)),
+                            shape: BoxShape.circle),
                         child: IconButton(
                           onPressed: () {
                             Navigator.push(
@@ -294,7 +304,7 @@ class _TicketPageState extends State<TicketPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CupertinoActivityIndicator(),
-                Text('GR CODE ដែល​អ្នក​បាន​​​ Scan មិនត្រឹមត្រូវ'),
+                // Text('GR CODE ដែល​អ្នក​បាន​​​ Scan មិនត្រឹមត្រូវ'),
               ],
             ),
           ),

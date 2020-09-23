@@ -104,14 +104,14 @@ class _DashBoardState extends State<DashBoard> {
                                       builder: (_) =>
                                           ScanPage(appModel: widget.appModel)));
                             }, 'assets/images/Fintech_mobile_scan_qr-512.png'),
-                            buildActionsWidget(1, context, size, 'cupon', () {
+                            buildActionsWidget(1, context, size, 'audients', () {
                               setState(() {
                                 selectedIndex = 1;
                               });
                               Navigator.push(context, MaterialPageRoute(
-                                builder: (_) => Participants()
+                                builder: (_) => Participants(appModel: widget.appModel,)
                               ));
-                            }, 'assets/images/ticket-icon-png-4.png'),
+                            }, 'assets/images/audient.png'),
                           ])),
                 ],
               ),
