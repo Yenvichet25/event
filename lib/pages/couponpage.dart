@@ -104,17 +104,22 @@ class _CouponPageState extends State<CouponPage> {
     //   ),
     // );
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.white,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: kSecondnaryColor,
+            leading:Padding(
+              padding: const EdgeInsets.only(top:7, left: 10),
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                child: Text("Back",style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black,
+                    fontFamily: 'Ubuntu'
+                ),),
               ),
             ),
             centerTitle: true,

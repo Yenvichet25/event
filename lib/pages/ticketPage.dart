@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:event_corner/model/appModel.dart';
 import 'package:event_corner/model/constants.dart';
 import 'package:event_corner/model/orderModel.dart';
+import 'package:event_corner/model/participant_model.dart';
 import 'package:event_corner/pages/couponpage.dart';
 import 'package:event_corner/pages/participants.dart';
 import 'package:event_corner/pages/scanPage.dart';
@@ -72,7 +73,8 @@ class _TicketPageState extends State<TicketPage> {
               padding: EdgeInsets.symmetric(horizontal: 20),
               color: kShadowListColor,
               child: Text('Accept',style: TextStyle(
-                color: Colors.white
+                color: Colors.black,
+                fontWeight: FontWeight.bold
               ),),
               onPressed: () {
                 confirmAudient();
@@ -82,7 +84,7 @@ class _TicketPageState extends State<TicketPage> {
             body: Stack(
               children: [
                 Container(
-                  color: kShadowColor,
+                  color: kPrimaryColor,
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
@@ -90,8 +92,9 @@ class _TicketPageState extends State<TicketPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TicketWidget(
+                        color: kSecondnaryColor.withOpacity(0.9),
                           width: size.width * 0.8,
-                          height: size.height * 0.6,
+                          height: size.height * 0.65,
                           isCornerRounded: true,
                           child: Column(
                             children: [
@@ -117,6 +120,7 @@ class _TicketPageState extends State<TicketPage> {
                                         Text(
                                           "No:",
                                           style: TextStyle(
+                                            color: kPrimaryColor,
                                               fontFamily: 'Ubuntu',
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -126,6 +130,7 @@ class _TicketPageState extends State<TicketPage> {
                                         Text(
                                           "${order['_id']}",
                                           style: TextStyle(
+                                            color: kPrimaryColor,
                                               fontWeight: FontWeight.bold),
                                         )
                                       ],
@@ -138,6 +143,7 @@ class _TicketPageState extends State<TicketPage> {
                                         Text(
                                           "Name:",
                                           style: TextStyle(
+                                            color: kPrimaryColor,
                                               fontFamily: 'Ubuntu',
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -147,6 +153,7 @@ class _TicketPageState extends State<TicketPage> {
                                         Text(
                                           '${order['userDoc']['profile']['name'].toUpperCase()}',
                                           style: TextStyle(
+                                            color: kPrimaryColor,
                                               fontWeight: FontWeight.bold),
                                         )
                                       ],
@@ -165,6 +172,7 @@ class _TicketPageState extends State<TicketPage> {
                                 child: Text(
                                   "${order['eventDoc']['title']}",
                                   style: TextStyle(
+                                    color: kPrimaryColor,
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Ubuntu'),
@@ -223,7 +231,7 @@ class _TicketPageState extends State<TicketPage> {
                                 'STATUS : ${order['status'].toUpperCase()}',
                                 style: TextStyle(
                                     fontFamily: 'Ubuntu',
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -236,46 +244,70 @@ class _TicketPageState extends State<TicketPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 40, left: 10),
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                            color: kShadowListColor,
-                           ),
-                        child: IconButton(
-                          onPressed: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: (_)=>ScanPage()));
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: kPrimaryColor,
-                          ),
-                        ),
+                      // child: Container(
+                      //   width: 50,
+                      //   height: 50,
+                      //   decoration: BoxDecoration(
+                      //     shape: BoxShape.circle,
+                      //       color: kShadowListColor,
+                      //      ),
+                      //   child: IconButton(
+                      //     onPressed: () {
+                      //       // Navigator.push(context, MaterialPageRoute(builder: (_)=>ScanPage()));
+                      //       Navigator.pop(context);
+                      //     },
+                      //     icon: Icon(
+                      //       Icons.arrow_back,
+                      //       color: kPrimaryColor,
+                      //     ),
+                      //   ),
+                      // ),
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child: Text("Back",style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.black,
+                            fontFamily: 'Ubuntu'
+                        ),),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 40, right: 10),
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: kShadowListColor,
-                            shape: BoxShape.circle),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) =>
-                                        CouponPage(coupons: order['items'])));
-                          },
-                          icon: Icon(
-                            Icons.calendar_view_day,
-                            color: kPrimaryColor,
-                          ),
-                        ),
+                      // child: Container(
+                      //   width: 50,
+                      //   height: 50,
+                      //   decoration: BoxDecoration(
+                      //       color: kShadowListColor,
+                      //       shape: BoxShape.circle),
+                      //   child: IconButton(
+                      //     onPressed: () {
+                      //       Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (_) =>
+                      //                   CouponPage(coupons: order['items'])));
+                      //     },
+                      //     icon: Icon(
+                      //       Icons.calendar_view_day,
+                      //       color: kPrimaryColor,
+                      //     ),
+                      //   ),
+                      // ),
+                      child: InkWell(
+                        onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            CouponPage(coupons: order['items'])));
+                        },
+                        child: Text("Coupons",style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black,
+                          fontFamily: 'Ubuntu'
+                        ),),
                       ),
                     ),
                   ],
@@ -287,6 +319,7 @@ class _TicketPageState extends State<TicketPage> {
 
   MaterialApp buildNoScanResultWidget() {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -333,7 +366,7 @@ Widget ticketDetailsWidget(String firstTitle, String firstDesc,
             firstDesc,
             style: TextStyle(
               fontFamily: 'Ubuntu',
-              color: Colors.black,
+              color: Colors.white,
             ),
           )
         ],
@@ -354,7 +387,7 @@ Widget ticketDetailsWidget(String firstTitle, String firstDesc,
               secondDesc,
               style: TextStyle(
                 fontFamily: 'Ubuntu',
-                color: Colors.black,
+                color: Colors.white,
               ),
             )
           ],

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:event_corner/model/appModel.dart';
 import 'package:event_corner/model/constants.dart';
+import 'package:event_corner/model/participant_model.dart';
 import 'package:event_corner/pages/ticketPage.dart';
 import 'package:event_corner/provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -53,6 +54,7 @@ class _ParticipantsState extends State<Participants> {
   Widget build(BuildContext context) {
     print(parti.length);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         home: Scaffold(
       backgroundColor: Color(0xfff2f2f2),
       appBar: AppBar(
@@ -267,14 +269,4 @@ class _ParticipantsState extends State<Participants> {
   }
 }
 
-class ParticipantModel {
-  String tikectId;
-  String name;
-  String tel;
 
-  ParticipantModel({this.tikectId, this.name, this.tel});
-  factory ParticipantModel.fromJson(json) {
-    return ParticipantModel(
-        tikectId: json['tiketId'], name: json['name'], tel: json['tel']);
-  }
-}

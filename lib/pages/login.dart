@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 //                    transform: Matrix4.translationValues(0.0,
 //                        (size.height - ((size.height) * animation.value)), 0.0),
                         transform: Matrix4.translationValues(
-                            0.0, size.height * 0.15 * animation.value, 0.0),
+                            0.0, size.height * 0.12 * animation.value, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(26.0),
                           child: Container(
