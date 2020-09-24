@@ -70,14 +70,18 @@ class _TicketPageState extends State<TicketPage> {
         ? buildNoScanResultWidget()
         : Scaffold(
             floatingActionButton: order['isPresence']?Container():CupertinoButton(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              color: kShadowListColor,
+              padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+              color: Colors.grey.withOpacity(0.3),
               child: Text('Accept',style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold
               ),),
               onPressed: () {
-                confirmAudient();
+                confirmAudient().then((data) {
+                  if(data['code']== 201){
+                    Navigator.pop(context);
+                  }
+                });
               },
             ),
             backgroundColor: Colors.white,
@@ -92,23 +96,26 @@ class _TicketPageState extends State<TicketPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TicketWidget(
-                        color: kSecondnaryColor.withOpacity(0.9),
+                        //color: kSecondnaryColor,
                           width: size.width * 0.8,
                           height: size.height * 0.65,
                           isCornerRounded: true,
                           child: Column(
                             children: [
                               SizedBox(
-                                height: 10,
+                                height: 15,
                               ),
                               Container(
-                                width: 150,
-                                height: 100,
+                                width: 120,
+                                height: 80,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         fit: BoxFit.contain,
                                         image:
-                                            AssetImage("assets/images/2.png"))),
+                                            AssetImage("assets/images/white.png"))),
+                              ),
+                              SizedBox(
+                                height: 25,
                               ),
                               Container(
                                 padding: EdgeInsets.only(top: 0, left: 10),
@@ -120,9 +127,9 @@ class _TicketPageState extends State<TicketPage> {
                                         Text(
                                           "No:",
                                           style: TextStyle(
+                                            fontSize: 14,
                                             color: kPrimaryColor,
-                                              fontFamily: 'Ubuntu',
-                                              fontWeight: FontWeight.bold),
+                                              fontFamily: 'Ubuntu',),
                                         ),
                                         SizedBox(
                                           width: 10,
@@ -130,7 +137,8 @@ class _TicketPageState extends State<TicketPage> {
                                         Text(
                                           "${order['_id']}",
                                           style: TextStyle(
-                                            color: kPrimaryColor,
+                                            color: Colors.yellow,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         )
                                       ],
@@ -145,7 +153,8 @@ class _TicketPageState extends State<TicketPage> {
                                           style: TextStyle(
                                             color: kPrimaryColor,
                                               fontFamily: 'Ubuntu',
-                                              fontWeight: FontWeight.bold),
+                                            fontSize: 14
+                                             ),
                                         ),
                                         SizedBox(
                                           width: 10,
@@ -153,7 +162,8 @@ class _TicketPageState extends State<TicketPage> {
                                         Text(
                                           '${order['userDoc']['profile']['name'].toUpperCase()}',
                                           style: TextStyle(
-                                            color: kPrimaryColor,
+                                            color: Colors.yellow,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         )
                                       ],
@@ -165,7 +175,7 @@ class _TicketPageState extends State<TicketPage> {
                                 ),
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 25,
                               ),
                               Align(
                                 alignment: Alignment.center,
@@ -207,7 +217,7 @@ class _TicketPageState extends State<TicketPage> {
                                           '${order['time'].toUpperCase()}'),
                                     ),
                                     SizedBox(
-                                      height: 20,
+                                      height:50,
                                     ),
                                     Row(
                                         children: List.generate(
@@ -218,7 +228,7 @@ class _TicketPageState extends State<TicketPage> {
                                                   child: Container(
                                                     width: 6,
                                                     height: 1,
-                                                    color: Colors.black,
+                                                    color: Colors.white,
                                                   ),
                                                 ))),
                                   ],

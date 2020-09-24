@@ -104,7 +104,7 @@ class _DashBoardState extends State<DashBoard> {
                                       builder: (_) =>
                                           ScanPage(appModel: widget.appModel)));
                             }, 'assets/images/Fintech_mobile_scan_qr-512.png'),
-                            buildActionsWidget(1, context, size, 'audients', () {
+                            buildActionsWidget(1, context, size, 'audiences', () {
                               setState(() {
                                 selectedIndex = 1;
                               });

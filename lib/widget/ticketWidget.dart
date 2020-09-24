@@ -29,6 +29,7 @@ class _TicketWidgetState extends State<TicketWidget> {
         height: widget.height,
         child: widget.child,
         decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage('assets/images/pattern.jpg'),fit: BoxFit.fitHeight),
             color: widget.color,
             borderRadius: widget.isCornerRounded
                 ? BorderRadius.circular(10.0)
